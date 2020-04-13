@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import ActionButton from 'react-native-action-button';
 
 import ErrorBoundary from './ErrorBoundary';
 import EventCard from './EventCard';
@@ -8,12 +9,12 @@ import { useInterval } from './CustomHook';
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 5,
     backgroundColor: '#F3F3F3',
   },
 });
 
-const EventList = () => {
+const EventList = ({ navigation }) => {
   const [events, setEvents] = useState([]);
 
   useInterval(() => {
@@ -33,8 +34,13 @@ const EventList = () => {
     setEvents(event);
   }, []);
 
-  return (
+  const handleAddEvent = () => {
+    navigation.navigate('EventForm');
+  };
+
+  return [
     <FlatList
+      key='list'
       style={styles.list}
       data={events}
       renderItem={({ item }) => (
@@ -43,8 +49,13 @@ const EventList = () => {
         </ErrorBoundary>
       )}
       keyExtractor={(item) => item.id}
-    />
-  );
+    />,
+    <ActionButton
+      key='fab'
+      onPress={handleAddEvent}
+      buttonColor='rgba(231, 76, 60, 1)'
+    />,
+  ];
 };
 
 export default EventList;
