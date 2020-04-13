@@ -1,22 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-const App = () => (
-  <View style={styles.container}>
-    <Text style={styles.text}>Hello world!</Text>
-  </View>
-);
+import EventList from './EventList';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-  },
-});
+const App = () => <EventList />;
 
 export default App;
